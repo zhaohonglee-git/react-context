@@ -1,14 +1,13 @@
 import React, { createContext, Component } from 'react'
 
-export const ThemeContext = React.createContext()
-
+export const ThemeContext = createContext()
 
 class ThemeContextProvider extends Component {
   state = {
-    isLightTheme: true,
+    isLightTheme: false,
     ligth: {
-      bg: '#eee',
-      ui: '#ddd',
+      bg: '#f4f4',
+      ui: '#b44',
       syntax: '#555'
     },
     dark: {
@@ -18,9 +17,15 @@ class ThemeContextProvider extends Component {
     }
   }
 
+  toggleTheme = () => {
+    this.setState({
+      isLightTheme: !this.state.isLightTheme
+    })
+  }
+
   render() {
     return (
-      <ThemeContext.Provider value={{ ...this.state }} >
+      <ThemeContext.Provider value={{ ...this.state, toggleTheme: this.toggleTheme }}  >
         {this.props.children}
       </ThemeContext.Provider>
     )
